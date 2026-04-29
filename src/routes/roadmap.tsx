@@ -287,6 +287,12 @@ function Roadmap() {
                       <div className="absolute inset-0 grid grid-cols-3">
                         {yearCols.map((y) => <div key={y} className="border-r border-border/40 last:border-0" />)}
                       </div>
+                      {selectedYear !== 0 && (
+                        <div
+                          className="absolute top-0 bottom-0 bg-primary/10 border-x border-primary/30 pointer-events-none"
+                          style={{ left: `${(selectedYear - 1) * (100 / 3)}%`, width: `${100 / 3}%` }}
+                        />
+                      )}
                       <div
                         className={`absolute top-1 bottom-1 rounded bg-gradient-to-r ${t.color} shadow-glow-sm overflow-hidden transition-all duration-500 group-hover:brightness-125`}
                         style={{ left: `${t.start}%`, width: `${t.end - t.start}%` }}
