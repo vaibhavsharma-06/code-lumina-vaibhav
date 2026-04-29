@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CheckCircle2, Circle, Target, Trophy, Zap, BarChart3, CalendarRange, GraduationCap, Eye } from "lucide-react";
 
