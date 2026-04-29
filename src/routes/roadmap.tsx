@@ -250,14 +250,22 @@ function Roadmap() {
               {/* Header */}
               <div className="grid grid-cols-[minmax(220px,1.4fr)_repeat(3,1fr)] items-end pb-3 mb-3 border-b border-border/60">
                 <div className="text-[10px] font-display tracking-widest text-muted-foreground uppercase">Task / Timeline</div>
-                {yearCols.map((y, i) => (
-                  <div key={y} className="text-center">
-                    <div className={`w-2 h-2 rounded-full mx-auto mb-1.5 ${i === 0 ? "bg-electric shadow-glow-sm" : "bg-border"}`} />
-                    <div className={`text-[10px] font-display tracking-widest uppercase ${i === 0 ? "text-electric" : "text-muted-foreground"}`}>
-                      {y}
-                    </div>
-                  </div>
-                ))}
+                {yearCols.map((y, i) => {
+                  const isSel = selectedYear === (i + 1);
+                  const isDim = selectedYear !== 0 && !isSel;
+                  return (
+                    <button
+                      key={y}
+                      onClick={() => setSelectedYear((selectedYear === (i + 1) ? 0 : ((i + 1) as 1 | 2 | 3)))}
+                      className={`text-center transition-smooth ${isDim ? "opacity-40" : ""}`}
+                    >
+                      <div className={`w-2 h-2 rounded-full mx-auto mb-1.5 ${isSel ? "bg-electric shadow-glow-sm" : "bg-border"}`} />
+                      <div className={`text-[10px] font-display tracking-widest uppercase ${isSel ? "text-electric" : "text-muted-foreground"}`}>
+                        {y}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Rows */}
