@@ -16,10 +16,10 @@ export const Route = createFileRoute("/contact")({
 });
 
 const channels = [
-  { icon: Mail, label: "Email", value: "vaibhav@example.com", href: "mailto:vaibhav@example.com" },
-  { icon: Phone, label: "Phone", value: "+91 ▒▒▒▒▒ ▒▒▒▒▒", href: "tel:+910000000000" },
-  { icon: Linkedin, label: "LinkedIn", value: "/in/vaibhav-sharma", href: "https://linkedin.com" },
-  { icon: Github, label: "GitHub", value: "@vaibhav-sharma", href: "https://github.com" },
+  { icon: Mail, label: "Email", value: "vaibhav.sharma20060@gmail.com", href: "mailto:vaibhav.sharma20060@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+91 63889 35645", href: "tel:+916388935645" },
+  { icon: Linkedin, label: "LinkedIn", value: "/in/vaibhavsharma0206", href: "https://www.linkedin.com/in/vaibhavsharma0206/" },
+  { icon: Github, label: "GitHub", value: "@vaibhavsharma-06", href: "https://github.com/vaibhavsharma-06" },
   { icon: Globe, label: "Portfolio", value: "vaibhav.dev", href: "#" },
 ];
 
