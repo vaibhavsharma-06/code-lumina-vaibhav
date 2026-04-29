@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, Mail, Sparkles, Brain, Code2, Rocket,
+  ArrowRight, Mail, Brain, Code2, Rocket,
   Github, Linkedin, MapPin, Cpu, Database, Atom,
 } from "lucide-react";
 import { NeuralBackground } from "@/components/NeuralBackground";
