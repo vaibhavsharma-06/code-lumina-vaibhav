@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { GraduationCap, Lightbulb, Compass, Rocket, Quote, Brain, Sparkles } from "lucide-react";
+import {
+  GraduationCap, Lightbulb, Compass, Rocket, Quote, Brain, Sparkles,
+  Target, Telescope, BookOpen, Code2, Globe, Cpu, Award, Users, Star,
+} from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export const Route = createFileRoute("/about")({
