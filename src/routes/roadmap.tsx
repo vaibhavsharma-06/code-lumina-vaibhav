@@ -174,7 +174,7 @@ function Roadmap() {
           </div>
 
           <div className="space-y-7">
-            {phases.map((p, idx) => (
+            {visiblePhases.map((p, idx) => (
               <div key={p.title} className="animate-fade-up" style={{ animationDelay: `${idx * 120}ms` }}>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -262,7 +262,10 @@ function Roadmap() {
 
               {/* Rows */}
               <div className="space-y-2.5">
-                {tracks.map((t, i) => (
+                {visibleTracks.length === 0 && (
+                  <div className="text-center py-8 text-sm text-muted-foreground">No tracks scheduled in this year.</div>
+                )}
+                {visibleTracks.map((t, i) => (
                   <div
                     key={t.task}
                     className="grid grid-cols-[minmax(220px,1.4fr)_repeat(3,1fr)] items-center group animate-fade-up"
