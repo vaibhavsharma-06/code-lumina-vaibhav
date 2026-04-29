@@ -100,6 +100,23 @@ const categoryDot: Record<Track["category"], string> = {
 };
 
 function Roadmap() {
+  // 0 = All years, 1/2/3 = single year
+  const [selectedYear, setSelectedYear] = useState<0 | 1 | 2 | 3>(0);
+
+  // Each year occupies a 33.33% slice on the 0–100 timeline
+  const yearRange = (y: 1 | 2 | 3) => ({ start: (y - 1) * (100 / 3), end: y * (100 / 3) });
+  const overlapsYear = (s: number, e: number, y: 1 | 2 | 3) => {
+    const r = yearRange(y);
+    return e > r.start && s < r.end;
+  };
+
+  const visiblePhases = selectedYear === 0
+    ? phases
+    : phases.filter((p) => overlapsYear(p.start, p.end, selectedYear));
+  const visibleTracks = selectedYear === 0
+    ? tracks
+    : tracks.filter((t) => overlapsYear(t.start, t.end, selectedYear));
+
   return (
     <div className="relative">
       <div className="absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-primary/15 blur-[120px] pointer-events-none" aria-hidden />
@@ -112,15 +129,48 @@ function Roadmap() {
           description="Structured, realistic, and aligned with my academic progression at LPU."
         />
 
+        {/* Year selector tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {([
+            { id: 0, label: "All Years" },
+            { id: 1, label: "Year 1 · 2026–27" },
+            { id: 2, label: "Year 2 · 2027–28" },
+            { id: 3, label: "Year 3 · 2028–29" },
+          ] as const).map((tab) => {
+            const active = selectedYear === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setSelectedYear(tab.id)}
+                className={`px-4 py-2 rounded-full text-xs font-display tracking-widest uppercase border transition-smooth ${
+                  active
+                    ? "bg-gradient-to-r from-primary to-accent text-primary-foreground border-transparent shadow-glow-sm"
+                    : "bg-secondary/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Phase Gantt card */}
         <div className="glow-border rounded-2xl p-6 md:p-10 noise relative">
           <div className="grid grid-cols-3 text-xs font-display tracking-widest text-muted-foreground mb-6">
-            {yearCols.map((q, i) => (
-              <div key={q} className="text-center">
-                <div className={`w-2 h-2 rounded-full mx-auto mb-2 ${i === 0 ? "bg-electric shadow-glow-sm" : "bg-border"}`} />
-                <span className={i === 0 ? "text-electric" : ""}>{q}</span>
-              </div>
-            ))}
+            {yearCols.map((q, i) => {
+              const isSel = selectedYear !== 0 && selectedYear === (i + 1);
+              const isDim = selectedYear !== 0 && !isSel;
+              return (
+                <button
+                  key={q}
+                  onClick={() => setSelectedYear((selectedYear === (i + 1) ? 0 : ((i + 1) as 1 | 2 | 3)))}
+                  className={`text-center transition-smooth ${isDim ? "opacity-40" : ""}`}
+                >
+                  <div className={`w-2 h-2 rounded-full mx-auto mb-2 ${isSel || (selectedYear === 0 && i === 0) ? "bg-electric shadow-glow-sm" : "bg-border"}`} />
+                  <span className={isSel ? "text-electric" : selectedYear === 0 && i === 0 ? "text-electric" : ""}>{q}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="space-y-7">
